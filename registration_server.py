@@ -41,10 +41,8 @@ class Participant(db.Model):
     covid_vaccine = db.Column(db.String(5))
     covid_rules = db.Column(db.String(5))
 
-    judo = db.Column(db.String(5))
-
-    # mentee_yes = db.Column(db.String(5))
-    # mentor_yes = db.Column(db.String(5))
+    newbie = db.Column(db.String(5))
+    first_sprint = db.Column(db.String(5))
 
     recording = db.Column(db.String(5))
     code_of_conduct = db.Column(db.String(5))
