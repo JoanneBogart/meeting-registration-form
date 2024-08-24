@@ -181,7 +181,8 @@
       <hr>
       <h5>LSST/DESC Membership</h5>
     <p>Are you currently a member of the Dark Energy Science Collaboration? This info will allow us to better make accommodations for non-DESC attendees.</p>
-      <div class="form-group">
+    <div class="form-group">
+      
         <div class="form-check">
           <input class="form-check-input" type="radio" id="member" name="descmember" value="yes" required>
           <label class="form-check-label" for="descmember">
@@ -194,7 +195,7 @@
             <b>No</b>
           </label>
         </div>
-      </div>
+      </div>   <!-- end membership form-group -->
 
       <hr>
 
@@ -206,7 +207,7 @@
             <b>Check if you plan to attend in person</b>
           </label>
         </div>
-      </div>
+      </div>     <!-- End in-person form-group -->
 
       <!-- This entire block is hidden until people click the in-person attendance button -->
       <div id="in_person_info">
@@ -234,7 +235,7 @@
                   for pronouns ?</a></small>
               <div class="invalid-feedback">Please provide your choice of pronoun.</div>
             </div>
-          </div>
+          </div>  <!-- end class col-sm -->
           <div class="col-sm">
             <div id="badge">
               <div id="lname-d">
@@ -257,9 +258,9 @@
               </div>
               <div id="logo1" class="logo"></div>
               <div id="logo2" class="logo"></div>
-            </div>
-          </div>
-        </div>
+           </div>  <!-- end div id badge -->
+          </div>     <!-- end 2nd class col-sm --> 
+        </div>      <!-- end class row -->
 
 
 
@@ -351,7 +352,7 @@ please see the <a href="https://confluence.slac.stanford.edu/x/UoHoHQ" target="_
  <p>Please ensure you have checked the correct button below.</p>
  <div class="form-group">
    <div class="form-check">
-      <input class="form-check-input" type="radio" name="access" id="visitor" value="visitor" checked>
+      <input class="form-check-input" type="radio" name="access"  value="visitor" checked>
       <label class="form-check-label" for="access">
         <b>I have submitted a
 <a href="https://erp-hprdext.erp.slac.stanford.edu/psc/hprdext/EMPLOYEE/HRMS/c/SL_DOE_FACT.SL_DOE_FACTS_USER.GBL?source=Visitor" target="_blank">
@@ -360,12 +361,15 @@ please see the <a href="https://confluence.slac.stanford.edu/x/UoHoHQ" target="_
     </div>
    
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="access" id="badge" value="badge">
+      <input class="form-check-input" type="radio" name="access" value="badge">
       <label class="form-check-label" for="access">
         <b>I have a valid SLAC badge</b>
       </label>
     </div>
-  </div>
+  </div>    <!-- End access form-group -->
+
+</div>   <!-- end containter -->
+</div>   <!-- end container -->
 
       <hr>
       <h5>DESC Meeting Contact Persons</h5>
