@@ -24,11 +24,14 @@ class Participant(db.Model):
     last_name = db.Column(db.String(100))
     email = db.Column(db.String(100), index=True, unique=True)
     affiliation = db.Column(db.String(100))
+    descmember = db.Column(db.String(5))
     in_person = db.Column(db.String(5))
     lname = db.Column(db.String(100))
     sname = db.Column(db.String(100))
     pronoun = db.Column(db.String(100))
-    descmember = db.Column(db.String(5))
+
+    #covid_vaccine = db.Column(db.String(5))
+    covid_rules = db.Column(db.String(5))
 
     monday = db.Column(db.String(5))
     tuesday = db.Column(db.String(5))
@@ -36,10 +39,9 @@ class Participant(db.Model):
     thursday = db.Column(db.String(5))
     friday = db.Column(db.String(5))
     dietary = db.Column(db.String(200))
+    access = db.Column(db.String(10))
     contact = db.Column(db.String(5))
 
-    covid_vaccine = db.Column(db.String(5))
-    covid_rules = db.Column(db.String(5))
 
     newbie = db.Column(db.String(5))
     first_sprint = db.Column(db.String(5))
