@@ -13,6 +13,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
     'DATABASE_URL', 'sqlite:////tmp/flask_app.db').replace("s://", "sql://", 1)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', '')
 db = SQLAlchemy(app)
+db.init_app(app)
 
 # Defines the registration entry
 
@@ -112,7 +113,7 @@ if __name__ == '__main__':
 
     if args.create:
         print("Creating database table if doesn't exist")
-        db.create_all(app=app)
+        db.create_all()
 
     if args.dump:
         print("Printing content of database.")
