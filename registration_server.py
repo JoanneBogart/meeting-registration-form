@@ -112,7 +112,7 @@ if __name__ == '__main__':
 
     if args.create:
         print("Creating database table if doesn't exist")
-        db.create_all()
+        db.create_all(app=app)
 
     if args.dump:
         print("Printing content of database.")
