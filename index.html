@@ -565,14 +565,13 @@ please see the <a href="https://confluence.slac.stanford.edu/x/UoHoHQ" target="_
         data: $("#main_form").serialize(),
         url: $("#main_form").attr('action'),
         success: function (data) {
-
-          // Registration successful so far, so let's proceed to payment
           $("#confirmation-content").html(data);
           $("#confirmationModal").modal({
             show: true,
             backdrop: 'static',
             keyboard: false
           });
+
         }
       });
 
@@ -682,25 +681,24 @@ please see the <a href="https://confluence.slac.stanford.edu/x/UoHoHQ" target="_
 
         if (document.getElementById("in_person").checked) {
           document.getElementById("pronoun").required = true;
-          document.getElementById("covid_vaccine").required = true;
           document.getElementById("covid_rules").required = true;
 
 
         } else {
           document.getElementById("pronoun").required = false;
-          document.getElementById("covid_vaccine").required = false;
           document.getElementById("covid_rules").required = false;
 
         };
 
       });
     });
-
+<!--
     $(document).ready(function () {
       $('#volunteer').click(function () {
         $('#volunteer_section').toggle(500);
       });
     });
+-->
   </script>
 
 </body>
