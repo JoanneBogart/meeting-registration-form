@@ -83,9 +83,8 @@ def register():
     # Remove secret field
     del kwargs['secret']
     participant = Participant(**kwargs)
-    with app.app_context():
-        db.session.add(participant)
-        db.session.commit()
+    db.session.add(participant)
+    db.session.commit()
 
     r = make_response(render_template(
         'success.html', data=participant))
