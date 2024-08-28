@@ -565,12 +565,11 @@ please see the <a href="https://confluence.slac.stanford.edu/x/UoHoHQ" target="_
       document.getElementById("register_button").addEventListener("click", function (event) {
         var form = document.getElementById("main_form");
 
-        // For debugging temporarily comment out the check
         // If form is not validated, don't trigger the registration
-        // if (form.checkValidity() === false) {
-        //   event.preventDefault();
-        //   event.stopPropagation();
-        // }
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
         form.classList.add('was-validated');
       }, true);
     });
