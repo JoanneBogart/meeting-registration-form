@@ -182,7 +182,7 @@
     <div class="form-group">
 
         <div class="form-check">
-          <input class="form-check-input" type="radio" id="member" name="descmember" value="yes" required>
+          <input class="form-check-input" type="radio" id="member" name="descmember" value="yes" required >
           <label class="form-check-label" for="descmember">
             <b>Yes</b>
           </label>
@@ -366,8 +366,8 @@ please see the <a href="https://confluence.slac.stanford.edu/x/UoHoHQ" target="_
     </div>
   </div>    <!-- End access form-group -->
 
-</div>   <!-- end containter -->
 </div>   <!-- end container -->
+</div>   <!-- end div in-person-info  -->
 
       <hr>
       <h5>DESC Meeting Contact Persons</h5>
@@ -397,46 +397,23 @@ please see the <a href="https://confluence.slac.stanford.edu/x/UoHoHQ" target="_
       <br> <br>
        Please indicate your experience with the DESC collaboration below.
       </p>
-      <ul>
+      <!-- <ul>   No need for list here -->
 
           <div class="form-group">
-            <div>
               <div class="form-check form-check-inline" id="inputNewbie">
                 <input class="form-check-input" type="checkbox" name="newbie" id="newbie" value="yes">
                 <label class="form-check-label" for="newbie">I'm new to the DESC collaboration.</label>
               </div>
-            </div>
           </div>
           <div class="form-group">
-            <div>
               <div class="form-check form-check-inline" id="inputFirstSprint">
                 <input class="form-check-input" type="checkbox" name="first_sprint" id="first_sprint" value="yes">
                 <label class="form-check-label" for="first_sprint">This is my first DESC Sprint Week.</label>
               </div>
-            </div>
           </div>
 
-<!--  I don't think we do this for meeting any more.
-          <div class="form-group">
-            <div>
-              <div class="form-check form-check-inline" id="inputMentee">
-                <input class="form-check-input" type="checkbox" name="mentee" id="mentee_yes" value="yes">
-                <label class="form-check-label" for="mentee_yes">I'd like to be paired with a mentor for the DESC 2024 Sprint Week!</label>
-              </div>
-            </div>
-          </div>
 
-          <div class="form-group">
-            <div>
-              <div class="form-check form-check-inline" id="inputMentor">
-                <input class="form-check-input" type="checkbox" name="mentor" id="mentor_yes" value="yes">
-                <label class="form-check-label" for="mentor_yes">I'd like to be a mentor for the DESC 2024 Sprint Week!</label>
-              </div>
-            </div>
-          </div>
--->
-
-      </ul>
+      <!--  </ul> -->
 
       <hr>
       <h5>A/V Accommodations</h5>
@@ -588,11 +565,12 @@ please see the <a href="https://confluence.slac.stanford.edu/x/UoHoHQ" target="_
       document.getElementById("register_button").addEventListener("click", function (event) {
         var form = document.getElementById("main_form");
 
+        // For debugging temporarily comment out the check
         // If form is not validated, don't trigger the registration
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
+        // if (form.checkValidity() === false) {
+        //   event.preventDefault();
+        //   event.stopPropagation();
+        // }
         form.classList.add('was-validated');
       }, true);
     });
@@ -657,8 +635,8 @@ please see the <a href="https://confluence.slac.stanford.edu/x/UoHoHQ" target="_
             }
           } else {
             // Server is unavailable...
-            // make sure we don't block the form at this stage
-            d.setCustomValidity("");
+            // make sure we do not block the form at this stage
+            d.setCustomValidity("could not check email; server unavailable");
             d.classList.remove('is-invalid');
           }
           console.log("Data: " + data + "\nStatus: " + status);
