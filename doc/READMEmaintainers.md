@@ -28,6 +28,8 @@ In order to be able to test everything thoroughly on your fork, you should set u
 ### First deploy
 You can pretty much follow the instructions in README.md, but I suggest first creating your Heroku account, then starting over from the README page to do the actual deploy (I’m not positive but I think when I tried to continue immediately after creating my account the page I saw didn’t match the description in the README. But the next time around, with my account already created, it did.)
 
+NOTE: The paragraph above and a bit of the one below (the part about SECRET_KEY) are largely superseded.  See the section below  "Updated deploy instructions".
+
 If the deploy is successful, click **Manage app**, then **Settings**, and finally click **Reveal Config Vars**. There are two: DATABASE_URL and SECRET_KEY. Copy and save the values for both. DATABASE_URL at least should be saved in a protected place (no read access for anyone else). These values don’t change if you need to redeploy the application. They of course do change if you delete the application and start over with the same name.
 
 ### Useful URLs
