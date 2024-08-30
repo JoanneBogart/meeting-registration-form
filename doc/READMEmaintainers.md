@@ -42,6 +42,37 @@ To see a summary of registered participants to date, use SERVER_URL
 
 **NOTE:** For your fork the registration URL will be a little different. `lsstdesc.github.io` will instead be `your-github-user.github.io`.   If your forked repo is not named meeting-registration-form, that part of the URL will also have to change.
 
+### Updated deploy instructions (August 2024)
+There have been enough changes in the way Heroku operates that much of the automation the README used to
+provide is broken. As one of the admins of the (paying) account SLAC has with Heroku I did the following
+to get everything up and running:
+
+* logged into Heroku site
+* created an app
+* created a variable (from **Settings** page) SECRET_KEY and gave it a value (doesn't matter too much what but,
+  since it will be a parameter in a url, stay away from characters like & or ? which could cause trouble).
+* added the add-on "Heroku Postgres" (from **Resources** page)
+* go to **Deploy** page
+* chose GitHub deploy method
+* connect to GitHub repo where your source is, e.g. YourName/meeting-registration-form or
+  LSSTDESC/meeting-registration-form. NOTE: you must have sufficient permission (e.g. admin; write permission
+  is not enough) in the repo for this to succeed.
+* select branch to deploy from and push the **Deploy Branch** button.  I've always used Manual deploy
+  rather than automatic.
+* when deploy is complete and successful, go to **More** button in the upper right and select "console".
+* from the console issue the command
+
+    python registration_server.py --create
+
+* it's no longer the case that the server url is just https://YOUR_APP_NAME.herokuapp.com. There are a
+  bunch of hex digits following the app name, like this example:
+
+   https://desc-oct2024-meeting-4fc146491d4c.herokuapp.com/
+* If you're deploying from a branch other than the standard (master or main), you need to tell GitHub pages
+  to deploy from that branch. From the GitHub repo home page go to "Settings" and click on "Pages" in the column
+  at the left.  Under Build and deployment/Branch select the desired branch.
+
+
 
 ### Querying the database
 Connect to the database using DATABASE_URL.   It’s in this format:
