@@ -25,12 +25,7 @@ In order to be able to test everything thoroughly on your fork, you should set u
 * click **Pages** (in the list to the left, under **Options**)
 * the drop-down menu under **Source** should say **None**. Choose the branch (either master or main) which will be the source. And you’re done.
 
-### First deploy
-You can pretty much follow the instructions in README.md, but I suggest first creating your Heroku account, then starting over from the README page to do the actual deploy (I’m not positive but I think when I tried to continue immediately after creating my account the page I saw didn’t match the description in the README. But the next time around, with my account already created, it did.)
-
-NOTE: The paragraph above and a bit of the one below (the part about SECRET_KEY) are largely superseded.  See the section below  "Updated deploy instructions".
-
-If the deploy is successful, click **Manage app**, then **Settings**, and finally click **Reveal Config Vars**. There are two: DATABASE_URL and SECRET_KEY. Copy and save the values for both. DATABASE_URL at least should be saved in a protected place (no read access for anyone else). These values don’t change if you need to redeploy the application. They of course do change if you delete the application and start over with the same name.
+### First deploy (as of August, 2024)
 
 ### Useful URLs
 Let SERVER_URL be
@@ -45,8 +40,7 @@ To see a summary of registered participants to date, use SERVER_URL
 **NOTE:** For your fork the registration URL will be a little different. `lsstdesc.github.io` will instead be `your-github-user.github.io`.   If your forked repo is not named meeting-registration-form, that part of the URL will also have to change.
 
 ### Updated deploy instructions (August 2024)
-There have been enough changes in the way Heroku operates that much of the automation the README used to
-provide is broken. As one of the admins of the (paying) account SLAC has with Heroku I did the following
+As one of the admins of the (paying) account SLAC has with Heroku I did the following
 to get everything up and running:
 
 * logged into Heroku site
@@ -56,24 +50,52 @@ to get everything up and running:
 * added the add-on "Heroku Postgres" (from **Resources** page)
 * go to **Deploy** page
 * chose GitHub deploy method
-* connect to GitHub repo where your source is, e.g. YourName/meeting-registration-form or
-  LSSTDESC/meeting-registration-form. NOTE: you must have sufficient permission (e.g. admin; write permission
-  is not enough) in the repo for this to succeed.
-* select branch to deploy from and push the **Deploy Branch** button.  I've always used Manual deploy
-  rather than automatic.
-* when deploy is complete and successful, go to **More** button in the upper right and select "console".
+* connect to GitHub repo where your source is, e.g.
+  YourName/meeting-registration-form or
+  LSSTDESC/meeting-registration-form. **NOTE:** you must have sufficient permission
+  (e.g. admin; write permission is not enough) in the repo for this to succeed.
+* select branch to deploy from and push the **Deploy Branch** button.
+  I've always used Manual deploy rather than automatic.
+* when deploy is complete and successful, go to **More** button in the upper right
+  and select "console".
 * from the console issue the command
 
     python registration_server.py --create
 
-* it's no longer the case that the server url is just https://YOUR_APP_NAME.herokuapp.com. There are a
-  bunch of hex digits following the app name, like this example:
+* it's no longer the case that the server url is just https://YOUR_APP_NAME.herokuapp.com. There are a bunch of hex digits following the app name, like this example:
 
    https://desc-oct2024-meeting-4fc146491d4c.herokuapp.com/
-* If you're deploying from a branch other than the standard (master or main), you need to tell GitHub pages
-  to deploy from that branch. From the GitHub repo home page go to "Settings" and click on "Pages" in the column
-  at the left.  Under Build and deployment/Branch select the desired branch.
 
+* If you're deploying from a branch other than the standard (master or main),
+  you need to tell GitHub pages to deploy from that branch. From the GitHub repo
+  home page go to "Settings" and click on "Pages" in the column
+  at the left.  Under "Build and deployment"/"Branch" select the desired branch.
+
+At this point you should be able to register people and display registered
+participants once you form URLs as described below.
+
+**NOTE:** Using this method of deployment with the GitHub connection enabled, the
+Heroku app will appear as an active "Environment" in the GitHub repository, so you may
+wish to disconnect that app from the GitHub repository after the meeting is over.
+
+### Useful Variables  URLs
+
+* SECRET_KEY:  The variable you set following the procedure above.
+* SERVER_URL:  The (Heroku) url you use to communicate with the server. If your
+  app is called MY_APP it will look something like
+  https://MY_APP-nnnnnnn.herokuapp.com where nnnnnnnn represents a bunch of hex digits.
+  Here is a typical example where MY_APP is desc-oct2024-meeting:
+  https://desc-oct2024-meeting-4fc146491d4c.herokuapp.com/
+  To find out what those hex digits are, from the Heroku site click "Open app"
+  button on the upper right and note the URL in your browser address field.
+  You should make a link to this URL on the Confluence Participants page.
+* DATABASE_URL: You can find this (along with SECRET_KEY) on the Heroku Settings page.
+  You'll need it to access the database directly (see next section).
+* Registration url.   This points to index.html as it appears in GitHub pages
+  and requires parameters with the values of SECRET_KEY and SERVER_URL.  It looks like
+  https://NS.github.io/REPO/index.html?backend=SERVER_URL&secret=SECRET_KEY
+  where NS is either LSSTDESC or your own GitHub name if you're using a fork
+  and REPO is normally meeting-registration-form
 
 
 ### Querying the database
@@ -90,7 +112,14 @@ hostname:port:database:username:password
 Set the permissions of the `.pgpass` file with `chmod 600 ~/.pgpass`, and you can then use client programs such as `pgsql` or `pgcli` to access the tables.
 
 ### Redeploy
-1. Install the Heroku CLI.   There are various ways to do this.  For my (mac) laptop I downloaded the tarball, unpacked, and set my path to include the bin directory so that the heroku command could be found.
+There are a couple ways to do this.  If you deployed according to instructions
+above it's probably easiest to go back to the Heroku site for your app and click
+on the (manual) deploy button again. See more details in the section
+"Redeploying from the Heroku web dashboard" below.
+
+Or you can use the Heroku CLI as follows:
+
+1. Install the Heroku CLI on your computer.   There are various ways to do this.  For my (mac) laptop I downloaded the tarball, unpacked, and set my path to include the bin directory so that the heroku command could be found.
 
 2. Do
     `$ heroku login`
@@ -124,3 +153,12 @@ One can also redeploy the app from the Heroku dashboard if the app is connected 
 
 ### Updating Dependencies
 If you have to change the version of something, manually change it only in `Pipfile`. It’s possible to deploy an app with just `Pipfile`; Heroku will generate a suitable `Pipfile.lock`, but for predictability this is not normally the way one should operate.  By generating `Pipfile.lock` yourself you guarantee that the same precise versions are used every time, until you want to change them.   `Pipfile.lock` can be generated by the utility `pipenv` (which, I must admit, I couldn’t manage to use. Instead I copied a `Pipfile.lock` generated by someone else who could.)
+
+### First Deploy (Deprecated)
+There have been enough changes in the way Heroku operates that much of the automation the README used to
+provide is broken. But, possibly of historical interest, here are old instructions back from when it worked:
+
+You can pretty much follow the instructions in README.md, but I suggest first creating your Heroku account, then starting over from the README page to do the actual deploy (I’m not positive but I think when I tried to continue immediately after creating my account the page I saw didn’t match the description in the README. But the next time around, with my account already created, it did.)
+
+
+If the deploy is successful, click **Manage app**, then **Settings**, and finally click **Reveal Config Vars**. There are two: DATABASE_URL and SECRET_KEY. Copy and save the values for both. DATABASE_URL at least should be saved in a protected place (no read access for anyone else). These values don’t change if you need to redeploy the application. They of course do change if you delete the application and start over with the same name.
