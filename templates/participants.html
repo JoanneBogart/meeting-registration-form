@@ -13,7 +13,8 @@
   <div class="container">
     <!-- <h2>LSST DESC Meeting participants</h2> -->
     <!-- <br> -->
-    Number of registered participants: {{data|length}}
+    Number of registered participants: {{data|length}} <br>
+    {{in_person_cnt}} in-person and {{remote_cnt}} remote participants
     <br>
     <table class="table table-hover">
       <thead class="thead-light">
@@ -30,7 +31,7 @@
           <td>{{item.first_name}}</td>
           <td>{{item.last_name}}</td>
           <td>{{item.affiliation}}</td>
-	  <td>{% if item.in_person == "on"%}In Person{% else %}Remote{% endif %}</td>	  
+	  <td>{% if item.in_person == "on"%}In Person{% else %}Remote{% endif %}</td>
         </tr>
         {% endfor %}
       </tbody>

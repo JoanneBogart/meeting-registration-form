@@ -100,7 +100,15 @@ def registered():
     # Get list of participants
     participants = Participant.query.order_by(Participant.last_name, Participant.first_name).with_entities(
         Participant.first_name, Participant.last_name, Participant.affiliation, Participant.in_person).all()
-    return render_template('participants.html', data=participants)
+    in_person = 0
+    remote = 0
+    for p in participants:
+        if p.in_person == "on":
+            in_person += 1
+        else:
+            remote += 1
+    return render_template('participants.html', data=participants, in_person_cnt=in_person,
+                           remote_cnt=remote)
 
 
 if __name__ == '__main__':
