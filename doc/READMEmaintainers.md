@@ -43,13 +43,13 @@ to get everything up and running:
 * when deploy is complete and successful, go to **More** button in the upper right
   and select "console".
 * from the console issue the command
-
+    ```
     python registration_server.py --create
-
+    ```
 * If you're deploying from a branch other than the standard (master or main),
   you need to tell GitHub pages to deploy from that branch. From the GitHub repo
-  home page go to "Settings" and click on "Pages" in the column
-  at the left.  Under "Build and deployment"/"Branch" select the desired branch.
+  home page go to **Settings** and click on **Pages** in the column
+  at the left.  Under **Build and deployment**/**Branch** select the desired branch.
 
 At this point you should be able to register people and display registered
 participants once you form URLs as described below.
@@ -64,12 +64,15 @@ wish to disconnect that app from the GitHub repository after the meeting is over
 
 * SERVER_URL:  The (Heroku) url you use to communicate with the server. If your
   app is called MY_APP it will look something like
-  https://MY_APP-nnnnnnn.herokuapp.com where nnnnnnnn represents a bunch of hex digits.
+  ```
+  https://MY_APP-nnnnnnn.herokuapp.com
+  ```
+  where nnnnnnnn represents a bunch of hex digits.
   Here is a typical example where MY_APP is desc-oct2024-meeting:
   ```
   https://desc-oct2024-meeting-4fc146491d4c.herokuapp.com/
   ```
-  To find out what those hex digits are, from the Heroku site click "Open app"
+  To find out what those hex digits are, from the Heroku site click the **Open app**
   button on the upper right and note the URL in your browser address field.
   You should make a link to this URL on the Confluence Participants page.
 
@@ -78,7 +81,9 @@ wish to disconnect that app from the GitHub repository after the meeting is over
 
 * Registration url.   This points to index.html as it appears in GitHub pages
   and requires parameters with the values of SECRET_KEY and SERVER_URL.  It looks like
+  ```
   https://NS.github.io/REPO/index.html?backend=SERVER_URL&secret=SECRET_KEY
+  ```
   where NS is either LSSTDESC or your own GitHub name if you're using a fork
   and REPO is normally meeting-registration-form
 
