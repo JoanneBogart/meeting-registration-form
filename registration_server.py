@@ -130,7 +130,7 @@ def registered():
     """
     # Get list of participants
     participants = Participant.query.order_by(Participant.last_name, Participant.first_name).with_entities(Participant.first_name, Participant.last_name, Participant.affiliation, Participant.in_person, Participant.site).all()
-    in_persons = [p for p in participants and p.in_person == "on"]
+    in_persons = [p for p in participants if p.in_person == "on"]
     n_in_person = len(in_persons)
     n_remote = len(participants) - n_in_person
     return render_template('participants.html', data=participants,
